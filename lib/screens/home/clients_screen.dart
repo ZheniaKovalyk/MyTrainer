@@ -23,9 +23,24 @@ class _ClientsScreenState extends State<ClientsScreen> {
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
     final trainerId = auth.user?.uid ?? '';
+    // If trainerId is not yet available, show a loading state instead of
+    // creating Providers with an empty document path (which causes Firestore
+    // to throw). This avoids the 'document path must be a non-empty string'
+    // errors during startup.
+    if (trainerId.isEmpty) {
+      return Scaffold(
+        body: AppBackground(
+          imageUrl:
+              'https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1350&q=80',
+          child: const SafeArea(
+            child: Center(child: CircularProgressIndicator()),
+          ),
+        ),
+      );
+    }
+
     return ChangeNotifierProvider(
-      create: (_) =>
-          ClientsProvider(context.read<FirestoreService>(), trainerId),
+      create: (_) => ClientsProvider(context.read<FirestoreService>(), trainerId),
       child: Scaffold(
         floatingActionButton: FloatingActionButton.extended(
           icon: const Icon(Icons.add),

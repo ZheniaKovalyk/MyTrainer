@@ -26,16 +26,29 @@ void main() async {
       rethrow;
     }
   }
-  runApp(const MyTrainerApp());
+  // Create and initialize services that need to run before the app starts.
+  final authService = AuthService();
+  await authService.init();
+  // Debug: print current Firebase user (if any) after init.
+  try {
+    final current = authService.currentUser;
+    debugPrint('main: FirebaseAuth.currentUser after init -> ${current?.uid}');
+  } catch (e) {
+    debugPrint('main: FirebaseAuth.currentUser read ERROR: $e');
+  }
+
+  runApp(MyTrainerApp(authService: authService));
 }
 
 class MyTrainerApp extends StatelessWidget {
-  const MyTrainerApp({super.key});
+  final AuthService authService;
+  const MyTrainerApp({super.key, required this.authService});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider(AuthService())),
+        ChangeNotifierProvider(create: (_) => AuthProvider(authService)),
         Provider(create: (_) => FirestoreService()),
         Provider(create: (_) => LocalPhotoService()),
       ],
