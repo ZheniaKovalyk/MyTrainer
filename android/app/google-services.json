@@ -1,0 +1,126 @@
+{
+  "project_info": {
+    "project_number": "362207324240",
+    "project_id": "fitflow-6ce21",
+    "storage_bucket": "fitflow-6ce21.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362207324240:android:e4fbfa3bf748f43222c955",
+        "android_client_info": {
+          "package_name": "com.example.fitflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADiCgY86DaK_BVde-jawYy7hqd3jbPOfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362207324240:android:11a8f42c9bc61da522c955",
+        "android_client_info": {
+          "package_name": "com.example.mytrainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADiCgY86DaK_BVde-jawYy7hqd3jbPOfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362207324240:android:3adaa66a8bda97ca22c955",
+        "android_client_info": {
+          "package_name": "com.example.mytrainerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADiCgY86DaK_BVde-jawYy7hqd3jbPOfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362207324240:android:c96d1276ab26733522c955",
+        "android_client_info": {
+          "package_name": "ua.mytrainer.fitflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADiCgY86DaK_BVde-jawYy7hqd3jbPOfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362207324240-9gpdb79ecrs5s1s7ot1jlb4s1jg01a45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
