@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../widgets/search_filter_bar.dart';
 import '../../widgets/app_background.dart';
 import '../../providers/workouts_provider.dart';
 import '../../services/firestore_service.dart';
@@ -46,12 +47,13 @@ class ClientDetailsScreen extends StatelessWidget {
           },
         ),
         body: AppBackground(
-          imageAsset: 'assets/bg_detail.jpg',
+          imageAsset: 'assets/bg_detail.png',
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
+                  // header (back + title + settings)
                   Row(
                     children: [
                       IconButton(
@@ -78,24 +80,52 @@ class ClientDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8),
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: (clientPhotoPath != null &&
-                              clientPhotoPath!.isNotEmpty)
-                          ? FileImage(File(clientPhotoPath!))
-                          : null,
-                      child:
-                          (clientPhotoPath == null || clientPhotoPath!.isEmpty)
-                              ? const Icon(Icons.person)
-                              : null,
-                    ),
-                    title: Text(clientName),
-                  ),
+                  // Search + filter bar for workouts (placed under header)
+                  Consumer<WorkoutsProvider>(builder: (_, prov, __) {
+                    return Column(children: [
+                      SearchFilterBar(
+                        onQueryChanged: prov.setQuery,
+                        onFilterTap: () async {
+                          await showModalBottomSheet(
+                              context: context,
+                              builder: (_) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(16),
+                                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                                    const Text('Сортування тренувань', style: TextStyle(fontWeight: FontWeight.bold)),
+                                    const SizedBox(height: 12),
+                                    SegmentedButton<int>(
+                                      segments: const <ButtonSegment<int>>[
+                                        ButtonSegment<int>(value: 0, label: Text('Дата: від нових до старих')),
+                                        ButtonSegment<int>(value: 1, label: Text('Дата: від старих до нових')),
+                                        ButtonSegment<int>(value: 2, label: Text('Опис: від А до Я')),
+                                        ButtonSegment<int>(value: 3, label: Text('Опис: від Я до А')),
+                                        ButtonSegment<int>(value: 4, label: Text('Тривалість: від найбільшої')),
+                                        ButtonSegment<int>(value: 5, label: Text('Тривалість: від найменшої')),
+                                      ],
+                                      selected: <int>{prov.sortMode},
+                                      onSelectionChanged: (newSelection) {
+                                        final selected = newSelection.isNotEmpty ? newSelection.first : prov.sortMode;
+                                        prov.setSortMode(selected);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    const SizedBox(height: 12),
+                                    ElevatedButton(onPressed: () => Navigator.pop(context), child: const Text('Закрити'))
+                                  ]),
+                                );
+                              });
+                        },
+                      ),
+                      const SizedBox(height: 8),
+                    ]);
+                  }),
+
                   const SizedBox(height: 8),
                   Expanded(
                     child: Consumer<WorkoutsProvider>(
                       builder: (_, prov, __) {
-                        final list = prov.docs;
+                          final list = prov.filtered;
                         if (list.isEmpty) {
                           return const Center(
                             child: Text('Немає тренувань'),

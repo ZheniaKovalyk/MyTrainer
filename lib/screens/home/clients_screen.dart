@@ -23,10 +23,6 @@ class _ClientsScreenState extends State<ClientsScreen> {
   Widget build(BuildContext context) {
     final auth = context.watch<AuthProvider>();
     final trainerId = auth.user?.uid ?? '';
-    // If trainerId is not yet available, show a loading state instead of
-    // creating Providers with an empty document path (which causes Firestore
-    // to throw). This avoids the 'document path must be a non-empty string'
-    // errors during startup.
     if (trainerId.isEmpty) {
       return Scaffold(
         body: AppBackground(
@@ -50,7 +46,7 @@ class _ClientsScreenState extends State<ClientsScreen> {
           },
         ),
         body: AppBackground(
-          imageUrl: 'https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1350&q=80',
+          imageAsset: 'assets/bg_detail.png',
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -77,12 +73,15 @@ class _ClientsScreenState extends State<ClientsScreen> {
                     ],
                   ),
                   const SizedBox(height: 8),
+
                   Consumer<ClientsProvider>(
                     builder: (_, prov, __) => SearchFilterBar(
                       onQueryChanged: prov.setQuery,
                       onFilterTap: () => _showFilter(context),
+                      showFilterButton: false,
                     ),
                   ),
+
                   const SizedBox(height: 8),
                   Expanded(
                     child: Consumer<ClientsProvider>(

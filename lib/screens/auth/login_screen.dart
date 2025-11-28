@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AppBackground(
-        imageAsset: 'assets/bg_main.jpg',
+        imageAsset: 'assets/bg_main.png',
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.all(24),

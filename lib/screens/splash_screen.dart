@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       final firebaseUser = await FirebaseAuth.instance
           .authStateChanges()
           .first
-          .timeout(const Duration(seconds: 3));
+          .timeout(const Duration(seconds: 10));
       debugPrint('SplashScreen: authStateChanges.first -> ${firebaseUser?.uid}');
       _navigate(firebaseUser);
     } catch (e) {
@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         body: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [
-      Image.asset('assets/logo.png', width: 120, height: 120),
+      Image.asset('assets/logo.png', width: 200, height: 200),
       const SizedBox(height: 12),
       Text('MyTrainer', style: Theme.of(context).textTheme.headlineMedium)
     ])));
