@@ -8,13 +8,6 @@ class WorkoutsProvider extends ChangeNotifier {
   final String clientId;
   List<QueryDocumentSnapshot<Map<String, dynamic>>> docs = [];
   String query = '';
-  // sortMode:
-  // 0 = date desc (default)
-  // 1 = date asc
-  // 2 = description A->Z
-  // 3 = description Z->A
-  // 4 = duration desc (longest first)
-  // 5 = duration asc (shortest first)
   int sortMode = 0;
 
   WorkoutsProvider(this._fs, this.trainerId, this.clientId) {

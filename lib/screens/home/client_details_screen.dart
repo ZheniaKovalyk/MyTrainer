@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/search_filter_bar.dart';
@@ -140,7 +139,14 @@ class ClientDetailsScreen extends StatelessWidget {
                             final data = d.data();
                             return Card(
                               child: ListTile(
-                                title: Text(data['description'] ?? ''),
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(data['description'] ?? ''),
+                                    Text('Тип: ${data['type'] ?? ''}'),
+                                    Text('Тривалість: ${data['duration'] ?? ''} хв'),
+                                  ],
+                                ),
                                 subtitle: Text(
                                   'Дата: ${(data['date'] as String?)?.substring(0, 10) ?? 'N/A'}',
                                 ),

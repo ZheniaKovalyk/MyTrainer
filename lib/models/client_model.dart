@@ -3,7 +3,7 @@ class ClientModel {
   final String firstName;
   final String lastName;
   final DateTime birthDate;
-  final String? photo; // локальний шлях
+  final String? photo;
   ClientModel(
       {required this.id,
       required this.firstName,

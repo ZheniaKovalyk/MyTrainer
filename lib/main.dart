@@ -8,28 +8,26 @@ import 'services/firestore_service.dart';
 import 'services/local_photo_service.dart';
 import 'providers/auth_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
+
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
-  // Avoid duplicate initialization when performing hot reload/hot restart
-  // or if Firebase is already initialized by other code.
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
   try {
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     }
   } catch (e) {
-    // Some environments (or native auto-init) may initialize Firebase already
-    // and calling initializeApp again can throw a duplicate-app error.
-    // Ignore that specific error and rethrow others.
     final msg = e.toString().toLowerCase();
     if (!(msg.contains('duplicate-app') || msg.contains('already exists') || msg.contains('already-initialized'))) {
       rethrow;
     }
   }
-  // Create and initialize services that need to run before the app starts.
-  final authService = AuthService();
+ final authService = AuthService();
   await authService.init();
-  // Debug: print current Firebase user (if any) after init.
   try {
     final current = authService.currentUser;
     debugPrint('main: FirebaseAuth.currentUser after init -> ${current?.uid}');
